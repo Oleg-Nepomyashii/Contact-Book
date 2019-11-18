@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import {BrowserRouter as Router , Route} from 'react-router-dom';
+
+import Login from './containers/auth/Login';
+import SidebarWrapper from './containers/menu/SidebarWrapper';
+
+import AddContactContainer from './containers/addContact/AddContactContainer';
+import ContactsWrapper from './containers/myContacts/ContactsWrapper';
+import UserContainer from './containers/contactInfo/UserContainer';
+
+const App = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Router>
+      	<>	
+          {
+            props.menu.menuPage.isLogged
+              ? <Route  exact path='/' 
+                          render={() => <SidebarWrapper categories={props.menu.menuPage}/>} />
+              : <Route   
+                  render={ () => <Login login={props.login} registration={props.registration} /> }
+               />
+          }
+
+          <Route path='/add' exact component={AddContactContainer} />
+          <Route path='/contacts'  component={ContactsWrapper} />
+          <Route path='/information'  component={UserContainer} />
+
+      	</>
+    </Router>
+  ); 
 }
 
 export default App;
+   
