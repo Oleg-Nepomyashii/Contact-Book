@@ -1,5 +1,4 @@
 import { createStore , combineReducers} from 'redux';
-import thunkMiddleware from 'redux-thunk';
 
 import menuReducer from '../reducers/menu-reducer';
 import contactsReducer from '../reducers/contacts-reducer';
